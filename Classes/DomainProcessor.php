@@ -46,14 +46,14 @@ class DomainProcessor
     public function saveDomainFromInput($request)
     {
         $countryId = $request->input('country') ?: $request->query('country');
-        $userId = $request->input('user_id') ?: $request->query('user_id');
+        $userId = $request->input('partner_id') ?: $request->query('partner_id');
         $domainName = $request->query('domain_name') ?: $request->query('domain_to_search') ?: $request->input('domain_name');
 
         $user = User::find($userId) ?: $request->user();
         $country = Country::first();
         $price = $this->getDomainPrice($request->input('name', $domainName));
 
-        $domain = Domain::where('name', $domainName)->where('user_id', $user->id)->first();
+        $domain = Domain::where('name', $domainName)->where('partner_id', $user->id)->first();
 
         if ($domain) {
             return $domain;
@@ -80,7 +80,7 @@ class DomainProcessor
             'city' => $request->input('city', $town),
             'country_id' => $country->id,
             'price_id' => $price->id,
-            'user_id' => $user->id,
+            'partner_id' => $user->id,
         ]);
 
         $domain->save();
@@ -156,7 +156,7 @@ class DomainProcessor
         $paymentProcessor = new PaymentProcessor();
 
         $paymentDict = [
-            "user_id" => $domain->user_id,
+            "partner_id" => $domain->partner_id,
             "app_name" => 'domain',
             "model_name" => 'Domain',
             "next_to" => $nextTo,
@@ -186,7 +186,7 @@ class DomainProcessor
         $paymentProcessor = new PaymentProcessor();
 
         $paymentDict = [
-            "user_id" => $domain->user_id,
+            "partner_id" => $domain->partner_id,
             "app_name" => 'domain',
             "model_name" => 'Domain',
             "next_to" => $nextTo,
