@@ -16,20 +16,6 @@ class Subdomain extends BaseModel
     protected $fillable = ['id', 'subdomain', 'description'];
 
     /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['subdomain'];
-
-    /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -51,34 +37,9 @@ class Subdomain extends BaseModel
         $this->fields->string('description')->nullable()->html('textarea');
 
     }
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['subdomain', 'description'];
-        $structure['form'] = [
-            ['label' => 'Default Autosetup Domain', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['subdomain', 'description']],
-        ];
-        $structure['filter'] = ['subdomain', 'description'];
-        return $structure;
-    }
 
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
 
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = [];
-        $rights['guest'] = [];
 
-        return $rights;
-    }
 
 }

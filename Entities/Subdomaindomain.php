@@ -16,20 +16,6 @@ class Subdomaindomain extends BaseModel
     protected $fillable = [ 'id', 'description', 'domain_id'];
 
     /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['domain_id__name'];
-
-    /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -51,34 +37,7 @@ class Subdomaindomain extends BaseModel
         $this->fields->bigInteger('domain_id')->nullable()->html('recordpicker')->relation(['domain', 'domain']);
 
     }
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['description', 'domain_id'];
-        $structure['form'] = [
-            ['label' => 'Register Subdomain', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['description', 'domain_id']],
-        ];
-        $structure['filter'] = ['description', 'domain_id'];
-        return $structure;
-    }
+ 
 
-
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 
 }

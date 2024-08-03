@@ -16,20 +16,6 @@ class Registrar extends BaseModel
     protected $fillable = ['id', 'title', 'name', 'description', 'params', 'test', 'file_path', 'published', ];
 
     /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['title'];
-
-    /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -56,35 +42,7 @@ class Registrar extends BaseModel
         $this->fields->boolean('published')->nullable()->html('switch')->default(false);
 
     }
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['title', 'name', 'published'];
-        $structure['form'] = [
-            ['label' => 'Registrar Detail', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['title', 'name', 'test', 'file_path', 'published']],
-            ['label' => 'Registrar Setting', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['description', 'params']],
-        ];
-        $structure['filter'] = ['title', 'name', 'published'];
-        return $structure;
-    }
+  
 
-
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
-
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = [];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 
 }

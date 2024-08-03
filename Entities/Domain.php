@@ -15,19 +15,6 @@ class Domain extends BaseModel
      */
     protected $fillable = ['id', 'name', 'amount', 'first_name', 'last_name', 'email', 'phone', 'address', 'post_code', 'city', 'expiry_date', 'upgrade_date', 'last_upgrade_date', 'paid', 'completed', 'successful', 'status', 'is_new', 'whois_synced', 'payment_id', 'partner_id', 'country_id', 'price_id'];
 
-    /**
-     * The fields that are to be render when performing relationship queries.
-     *
-     * @var array<string>
-     */
-    public $rec_names = ['name'];
-
-    /**
-     * List of tables names that are need in this model during migration.
-     *
-     * @var array<string>
-     */
-    public array $migrationDependancy = [];
 
     /**
      * The table associated with the model.
@@ -71,37 +58,9 @@ class Domain extends BaseModel
         $this->fields->bigInteger('price_id')->nullable()->html('recordpicker')->relation(['domain', 'price']);
 
     }
-    /**
-     * List of structure for this model.
-     */
-    public function structure($structure): array
-    {
-        $structure['table'] = ['name', 'amount', 'first_name', 'last_name', 'paid', 'completed', 'successful', 'status', 'payment_id', 'partner_id'];
-        $structure['form'] = [
-            ['label' => 'Domain Detail', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['name', 'amount', 'payment_id', 'partner_id', 'country_id', 'price_id']],
-            ['label' => 'Domain Contact', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['first_name', 'last_name', 'email', 'phone', 'address', 'post_code', 'city']],
-            ['label' => 'Domain Dates', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['expiry_date', 'upgrade_date', 'last_upgrade_date']],
-            ['label' => 'Domain Status', 'class' => 'col-span-full md:col-span-6 md:pr-2', 'fields' => ['paid', 'completed', 'successful', 'status', 'is_new', 'whois_synced']],
-        ];
-        $structure['filter'] = ['name', 'amount', 'paid', 'completed', 'successful', 'status', 'payment_id', 'partner_id', 'country_id', 'price_id'];
-        return $structure;
-    }
+  
 
 
-    /**
-     * Define rights for this model.
-     *
-     * @return array
-     */
-    public function rights(): array
-    {
-        $rights = parent::rights();
 
-        $rights['staff'] = ['view' => true];
-        $rights['registered'] = ['view' => true];
-        $rights['guest'] = [];
-
-        return $rights;
-    }
 
 }
