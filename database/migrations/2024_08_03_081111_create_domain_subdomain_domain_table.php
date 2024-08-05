@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('domain_subdomain_domain', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('description')->nullable();
+            $table->bigInteger('domain_id')->nullable();
+
             $table->timestamps();
         });
     }

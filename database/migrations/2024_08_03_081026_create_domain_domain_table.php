@@ -13,6 +13,29 @@ return new class extends Migration
     {
         Schema::create('domain_domain', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->decimal('amount', 11)->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('post_code');
+            $table->string('city');
+            $table->dateTime('expiry_date', 6)->nullable();
+            $table->dateTime('upgrade_date', 6)->nullable();
+            $table->dateTime('last_upgrade_date', 6)->nullable();
+            $table->boolean('paid')->nullable()->default(false);
+            $table->boolean('completed')->nullable()->default(false);
+            $table->boolean('successful')->nullable()->default(false);
+            $table->boolean('status')->nullable()->default(false);
+            $table->boolean('is_new')->nullable()->default(false);
+            $table->boolean('whois_synced')->nullable();
+            $table->bigInteger('payment_id')->nullable();
+            $table->integer('partner_id')->nullable();
+            $table->bigInteger('country_id')->nullable();
+            $table->bigInteger('price_id')->nullable();
             
             $table->timestamps();
         });

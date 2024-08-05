@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('domain_price', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('title');
+            $table->decimal('price', 11);
+            $table->string('tld');
+            $table->integer('ordering')->nullable();
+            $table->boolean('published')->nullable()->default(false);
+            $table->bigInteger('registrar_id')->nullable();
+
             $table->timestamps();
         });
     }

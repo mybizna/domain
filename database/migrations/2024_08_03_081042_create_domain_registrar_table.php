@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('domain_registrar', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('title');
+            $table->string('name');
+            $table->longText('description');
+            $table->longText('params')->nullable();
+            $table->integer('test')->nullable();
+            $table->string('file_path')->nullable();
+            $table->boolean('published')->nullable()->default(false);
+
             $table->timestamps();
         });
     }
