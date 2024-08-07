@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('description')->nullable();
-            $table->bigInteger('domain_id')->nullable();
+            $table->foreignId('domain_id')->nullable();
 
             $table->timestamps();
         });

@@ -32,10 +32,10 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(false);
             $table->boolean('is_new')->nullable()->default(false);
             $table->boolean('whois_synced')->nullable();
-            $table->bigInteger('payment_id')->nullable();
-            $table->integer('partner_id')->nullable();
-            $table->bigInteger('country_id')->nullable();
-            $table->bigInteger('price_id')->nullable();
+            $table->foreignId('payment_id')->nullable();
+            $table->foreignId('partner_id')->nullable();
+            $table->foreignId('country_id')->nullable();
+            $table->foreignId('price_id')->nullable();
             
             $table->timestamps();
         });
