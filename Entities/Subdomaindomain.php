@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Domain\Entities;
+namespace Modules\Domain\Models;
 
-use Modules\Base\Entities\BaseModel;
+use Modules\Base\Models\BaseModel;
 
 class Subdomaindomain extends BaseModel
 {

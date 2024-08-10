@@ -3,12 +3,12 @@
 namespace Modules\Domain\Classes;
 
 use App\Http\Middleware\RequestMiddleware;
-use Modules\Core\Entities\Country;
-use Modules\Domain\Entities\Domain;
-use Modules\Domain\Entities\Price;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Modules\Core\Models\Country;
+use Modules\Domain\Models\Domain;
+use Modules\Domain\Models\Price;
 
 class DomainProcessor
 {

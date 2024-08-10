@@ -4,7 +4,7 @@ namespace Modules\Domain\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
 use Modules\Domain\Classes\DomainProcessor;
-use Modules\Domain\Entities\Domain;
+use Modules\Domain\Models\Domain;
 
 class DomainController extends Controller
 {
