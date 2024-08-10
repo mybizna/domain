@@ -32,11 +32,11 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(false);
             $table->boolean('is_new')->nullable()->default(false);
             $table->boolean('whois_synced')->nullable();
-            $table->foreignId('payment_id')->constrained('account_payment')->onDelete('cascade')->nullable()->index('payment_id');
-            $table->foreignId('partner_id')->constrained('partner_partner')->onDelete('cascade')->nullable()->index('partner_id');
-            $table->foreignId('country_id')->constrained('core_country')->onDelete('cascade')->nullable()->index('country_id');
-            $table->foreignId('price_id')->constrained('domain_price')->onDelete('cascade')->nullable()->index('price_id');
-            
+            $table->foreignId('payment_id')->constrained('account_payment')->onDelete('cascade')->nullable()->index('domain_domain_payment_id');
+            $table->foreignId('partner_id')->constrained('partner_partner')->onDelete('cascade')->nullable()->index('domain_domain_partner_id');
+            $table->foreignId('country_id')->constrained('core_country')->onDelete('cascade')->nullable()->index('domain_domain_country_id');
+            $table->foreignId('price_id')->constrained('domain_price')->onDelete('cascade')->nullable()->index('domain_domain_price_id');
+
             $table->timestamps();
         });
     }
