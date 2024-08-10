@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tld');
             $table->integer('ordering')->nullable();
             $table->boolean('published')->nullable()->default(false);
-            $table->foreignId('registrar_id')->nullable();
+            $table->foreignId('registrar_id')->constrained('domain_registrar')->onDelete('cascade')->nullable()->index('registrar_id');
 
             $table->timestamps();
         });
