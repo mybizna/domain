@@ -20,5 +20,4 @@ class Subdomaindomain extends BaseModel
      * @var string
      */
     protected $table = "domain_subdomaindomain";
-
 }
