@@ -9,7 +9,7 @@ class DomainServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Domain';
 
-    protected string $moduleNameLower = 'Domain';
+    protected string $moduleNameLower = 'domain';
 
     /**
      * Boot the application events.

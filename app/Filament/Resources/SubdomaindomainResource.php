@@ -2,20 +2,22 @@
 
 namespace Modules\Domain\Filament\Resources;
 
-use Modules\Domain\Filament\Resources\SubdomaindomainResource\Pages;
-use Modules\Domain\Filament\Resources\SubdomaindomainResource\RelationManagers;
-use Modules\Domain\Models\Subdomaindomain;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Domain\Filament\Resources\SubdomaindomainResource\Pages;
+use Modules\Domain\Models\Subdomaindomain;
 
 class SubdomaindomainResource extends Resource
 {
     protected static ?string $model = Subdomaindomain::class;
+
+    protected static ?string $slug = 'domain/subdomain/domain';
+
+    protected static ?string $navigationGroup = 'Domain';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

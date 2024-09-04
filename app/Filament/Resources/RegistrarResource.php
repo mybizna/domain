@@ -2,9 +2,6 @@
 
 namespace Modules\Domain\Filament\Resources;
 
-use Modules\Domain\Filament\Resources\RegistrarResource\Pages;
-use Modules\Domain\Filament\Resources\RegistrarResource\RelationManagers;
-use Modules\Domain\Models\Registrar;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +9,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Domain\Filament\Resources\RegistrarResource\Pages;
+use Modules\Domain\Models\Registrar;
 
 class RegistrarResource extends Resource
 {
     protected static ?string $model = Registrar::class;
+
+    protected static ?string $slug = 'domain/registrar';
+
+    protected static ?string $navigationGroup = 'Domain';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
