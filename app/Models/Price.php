@@ -3,6 +3,7 @@
 namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
+use Modules\Domain\Models\Registrar;
 
 class Price extends BaseModel
 {
@@ -20,4 +21,14 @@ class Price extends BaseModel
      * @var string
      */
     protected $table = "domain_price";
+
+    /**
+     * Add relationship to Registrar
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function registrar()
+    {
+        return $this->belongsTo(Registrar::class);
+    }
+
 }

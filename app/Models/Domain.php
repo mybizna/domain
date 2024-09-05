@@ -2,7 +2,11 @@
 
 namespace Modules\Domain\Models;
 
+use Modules\Account\Models\Payment;
 use Modules\Base\Models\BaseModel;
+use Modules\Core\Models\Country;
+use Modules\Domain\Models\Price;
+use Modules\Partner\Models\Partner;
 
 class Domain extends BaseModel
 {
@@ -20,5 +24,41 @@ class Domain extends BaseModel
      * @var string
      */
     protected $table = "domain_domain";
+
+    /**
+     * Add relationship to Country
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Add relationship to Payment
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+    /**
+     * Add relationship to Partner
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
+    /**
+     * Add relationship to Price
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function price()
+    {
+        return $this->belongsTo(Price::class);
+    }
 
 }

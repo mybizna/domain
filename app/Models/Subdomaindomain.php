@@ -3,6 +3,7 @@
 namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
+use Modules\Domain\Models\Domain;
 
 class Subdomaindomain extends BaseModel
 {
@@ -20,4 +21,13 @@ class Subdomaindomain extends BaseModel
      * @var string
      */
     protected $table = "domain_subdomaindomain";
+
+    /**
+     * Add relationship to Domain
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class);
+    }
 }
