@@ -20,7 +20,7 @@ class Subdomaindomain extends BaseModel
      *
      * @var string
      */
-    protected $table = "domain_subdomaindomain";
+    protected $table = "domain_subdomain_domain";
 
     /**
      * Add relationship to Domain
