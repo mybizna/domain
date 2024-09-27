@@ -19,9 +19,14 @@ return new class extends Migration
             $table->string('tld');
             $table->integer('ordering')->nullable();
             $table->boolean('published')->nullable()->default(false);
-            $table->foreignId('registrar_id')->constrained('domain_registrar')->onDelete('cascade')->nullable()->index('domain_price_registrar_id');
+            $table->foreignId('registrar_id')->nullable()->constrained('domain_registrar')->onDelete('set null');
+
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

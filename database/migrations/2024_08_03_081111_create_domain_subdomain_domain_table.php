@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
 
             $table->string('description')->nullable();
-            $table->foreignId('domain_id')->constrained('domain_domain')->onDelete('cascade')->nullable()->index('domain_subdomain_domain_domain_id');
+            $table->foreignId('domain_id')->nullable()->constrained('domain_domain')->onDelete('set null');
+
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

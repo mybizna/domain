@@ -32,12 +32,17 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(false);
             $table->boolean('is_new')->nullable()->default(false);
             $table->boolean('whois_synced')->nullable();
-            $table->foreignId('payment_id')->constrained('account_payment')->onDelete('cascade')->nullable()->index('domain_domain_payment_id');
-            $table->foreignId('partner_id')->constrained('partner_partner')->onDelete('cascade')->nullable()->index('domain_domain_partner_id');
-            $table->foreignId('country_id')->constrained('core_country')->onDelete('cascade')->nullable()->index('domain_domain_country_id');
-            $table->foreignId('price_id')->constrained('domain_price')->onDelete('cascade')->nullable()->index('domain_domain_price_id');
+            $table->foreignId('payment_id')->nullable()->constrained('account_payment')->onDelete('set null');
+            $table->foreignId('partner_id')->nullable()->constrained('partner_partner')->onDelete('set null');
+            $table->foreignId('country_id')->nullable()->constrained('core_country')->onDelete('set null');
+            $table->foreignId('price_id')->nullable()->constrained('domain_price')->onDelete('set null');
+
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
