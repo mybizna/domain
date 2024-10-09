@@ -4,15 +4,12 @@ namespace Modules\Domain\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Domain\Filament\Resources\RegistrarResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Domain\Models\Registrar;
 
-class RegistrarResource extends Resource
+class RegistrarResource extends BaseResource
 {
     protected static ?string $model = Registrar::class;
 
@@ -86,27 +83,4 @@ class RegistrarResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListRegistrars::route('/'),
-            'create' => Pages\CreateRegistrar::route('/create'),
-            'edit' => Pages\EditRegistrar::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

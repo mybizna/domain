@@ -4,15 +4,12 @@ namespace Modules\Domain\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Domain\Filament\Resources\DomainResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Domain\Models\Domain;
 
-class DomainResource extends Resource
+class DomainResource extends BaseResource
 {
     protected static ?string $model = Domain::class;
 
@@ -159,27 +156,4 @@ class DomainResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListDomains::route('/'),
-            'create' => Pages\CreateDomain::route('/create'),
-            'edit' => Pages\EditDomain::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

@@ -4,15 +4,12 @@ namespace Modules\Domain\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Domain\Filament\Resources\PriceResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Domain\Models\Price;
 
-class PriceResource extends Resource
+class PriceResource extends BaseResource
 {
     protected static ?string $model = Price::class;
 
@@ -89,27 +86,4 @@ class PriceResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListPrices::route('/'),
-            'create' => Pages\CreatePrice::route('/create'),
-            'edit' => Pages\EditPrice::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

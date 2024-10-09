@@ -3,15 +3,12 @@
 namespace Modules\Domain\Filament\Resources;
 
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Domain\Filament\Resources\SubdomaindomainResource\Pages;
+use Modules\Base\Filament\Resources\BaseResource;
 use Modules\Domain\Models\Subdomaindomain;
 
-class SubdomaindomainResource extends Resource
+class SubdomaindomainResource extends BaseResource
 {
     protected static ?string $model = Subdomaindomain::class;
 
@@ -50,27 +47,4 @@ class SubdomaindomainResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListSubdomaindomains::route('/'),
-            'create' => Pages\CreateSubdomaindomain::route('/create'),
-            'edit' => Pages\EditSubdomaindomain::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }
