@@ -7,6 +7,8 @@ use Modules\Base\Models\BaseModel;
 use Modules\Core\Models\Country;
 use Modules\Domain\Models\Price;
 use Modules\Partner\Models\Partner;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Domain extends BaseModel
 {
@@ -29,7 +31,7 @@ class Domain extends BaseModel
      * Add relationship to Country
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function country()
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
@@ -38,7 +40,7 @@ class Domain extends BaseModel
      * Add relationship to Payment
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function payment()
+    public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
     }
@@ -47,7 +49,7 @@ class Domain extends BaseModel
      * Add relationship to Partner
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function partner()
+    public function partner(): BelongsTo
     {
         return $this->belongsTo(Partner::class);
     }
@@ -56,9 +58,37 @@ class Domain extends BaseModel
      * Add relationship to Price
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function price()
+    public function price(): BelongsTo
     {
         return $this->belongsTo(Price::class);
     }
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('name');
+        $table->decimal('amount', 11)->nullable();
+        $table->string('first_name');
+        $table->string('last_name');
+        $table->string('email');
+        $table->string('phone');
+        $table->string('address');
+        $table->string('post_code');
+        $table->string('city');
+        $table->dateTime('expiry_date', 6)->nullable();
+        $table->dateTime('upgrade_date', 6)->nullable();
+        $table->dateTime('last_upgrade_date', 6)->nullable();
+        $table->boolean('paid')->nullable()->default(false);
+        $table->boolean('completed')->nullable()->default(false);
+        $table->boolean('successful')->nullable()->default(false);
+        $table->boolean('status')->nullable()->default(false);
+        $table->boolean('is_new')->nullable()->default(false);
+        $table->boolean('whois_synced')->nullable();
+        $table->foreignId('payment_id')->nullable()->constrained(table: 'account_payment')->onDelete('set null');
+        $table->foreignId('partner_id')->nullable()->constrained(table: 'partner_partner')->onDelete('set null');
+        $table->foreignId('country_id')->nullable()->constrained(table: 'core_country')->onDelete('set null');
+        $table->foreignId('price_id')->nullable()->constrained(table: 'domain_price')->onDelete('set null');
+    }
 }

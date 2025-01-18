@@ -3,6 +3,7 @@
 namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Subdomain extends BaseModel
 {
@@ -21,4 +22,13 @@ class Subdomain extends BaseModel
      */
     protected $table = "domain_subdomain";
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('subdomain');
+        $table->text('description')->nullable();
+
+    }
 }

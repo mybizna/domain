@@ -3,6 +3,7 @@
 namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
+use Illuminate\Database\Schema\Blueprint;
 
 class Registrar extends BaseModel
 {
@@ -21,4 +22,17 @@ class Registrar extends BaseModel
      */
     protected $table = "domain_registrar";
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('title');
+        $table->string('name');
+        $table->longText('description');
+        $table->longText('params')->nullable();
+        $table->integer('test')->nullable();
+        $table->string('file_path')->nullable();
+        $table->boolean('published')->nullable()->default(false);
+    }
 }

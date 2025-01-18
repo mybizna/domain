@@ -4,6 +4,8 @@ namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
 use Modules\Domain\Models\Domain;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Subdomaindomain extends BaseModel
 {
@@ -26,8 +28,17 @@ class Subdomaindomain extends BaseModel
      * Add relationship to Domain
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function domain()
+    public function domain(): BelongsTo
     {
         return $this->belongsTo(Domain::class);
+    }
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('subdomain');
+        $table->text('description')->nullable();
+
     }
 }

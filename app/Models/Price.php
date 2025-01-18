@@ -4,6 +4,7 @@ namespace Modules\Domain\Models;
 
 use Modules\Base\Models\BaseModel;
 use Modules\Domain\Models\Registrar;
+use Illuminate\Database\Schema\Blueprint;
 
 class Price extends BaseModel
 {
@@ -26,9 +27,22 @@ class Price extends BaseModel
      * Add relationship to Registrar
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function registrar()
+    public function registrar(): BelongsTo
     {
         return $this->belongsTo(Registrar::class);
     }
 
+
+    public function migration(Blueprint $table): void
+    {
+        $table->id();
+
+        $table->string('title');
+        $table->decimal('price', 11);
+        $table->string('tld');
+        $table->integer('ordering')->nullable();
+        $table->boolean('published')->nullable()->default(false);
+        $table->foreignId('registrar_id')->nullable()->constrained('domain_registrar')->onDelete('set null');
+
+    }
 }
