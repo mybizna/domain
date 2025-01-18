@@ -1,14 +1,23 @@
 <?php
-
 namespace Modules\Domain\Models;
 
+use Base\Casts\Money;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Schema\Blueprint;
 use Modules\Base\Models\BaseModel;
 use Modules\Domain\Models\Registrar;
-use Illuminate\Database\Schema\Blueprint;
 
 class Price extends BaseModel
 {
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'total' => Money::class, // Use the custom MoneyCast
+    ];
     /**
      * The fields that can be filled
      *
@@ -32,13 +41,12 @@ class Price extends BaseModel
         return $this->belongsTo(Registrar::class);
     }
 
-
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('title');
-        $table->decimal('price', 11);
+        $table->integer('price');
+        $table->string('currency')->default('USD');
         $table->string('tld');
         $table->integer('ordering')->nullable();
         $table->boolean('published')->nullable()->default(false);

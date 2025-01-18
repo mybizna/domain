@@ -1,18 +1,26 @@
 <?php
-
 namespace Modules\Domain\Models;
 
+use Base\Casts\Money;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Schema\Blueprint;
 use Modules\Account\Models\Payment;
 use Modules\Base\Models\BaseModel;
 use Modules\Core\Models\Country;
 use Modules\Domain\Models\Price;
 use Modules\Partner\Models\Partner;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Domain extends BaseModel
 {
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'total' => Money::class, // Use the custom MoneyCast
+    ];
     /**
      * The fields that can be filled
      *
@@ -63,13 +71,12 @@ class Domain extends BaseModel
         return $this->belongsTo(Price::class);
     }
 
-
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('name');
-        $table->decimal('amount', 11)->nullable();
+        $table->integer('amount')->nullable();
+        $table->string('currency')->default('USD');
         $table->string('first_name');
         $table->string('last_name');
         $table->string('email');

@@ -35,7 +35,6 @@ class Subdomaindomain extends BaseModel
 
     public function migration(Blueprint $table): void
     {
-        $table->id();
 
         $table->string('subdomain');
         $table->text('description')->nullable();
