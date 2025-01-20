@@ -50,7 +50,11 @@ class Price extends BaseModel
         $table->string('tld');
         $table->integer('ordering')->nullable();
         $table->boolean('published')->nullable()->default(false);
-        $table->foreignId('registrar_id')->nullable()->constrained('domain_registrar')->onDelete('set null');
+        $table->unsignedBigInteger('registrar_id')->nullable();
+    }
 
+    public function post_migration(Blueprint $table): void
+    {
+        $table->foreign('registrar_id')->references('id')->on('domain_registrar')->onDelete('set null');
     }
 }

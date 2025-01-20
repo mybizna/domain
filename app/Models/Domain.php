@@ -93,9 +93,17 @@ class Domain extends BaseModel
         $table->boolean('status')->nullable()->default(false);
         $table->boolean('is_new')->nullable()->default(false);
         $table->boolean('whois_synced')->nullable();
-        $table->foreignId('payment_id')->nullable()->constrained(table: 'account_payment')->onDelete('set null');
-        $table->foreignId('partner_id')->nullable()->constrained(table: 'partner_partner')->onDelete('set null');
-        $table->foreignId('country_id')->nullable()->constrained(table: 'core_country')->onDelete('set null');
-        $table->foreignId('price_id')->nullable()->constrained(table: 'domain_price')->onDelete('set null');
+        $table->unsignedBigInteger('payment_id')->nullable();
+        $table->unsignedBigInteger('partner_id')->nullable();
+        $table->unsignedBigInteger('country_id')->nullable();
+        $table->unsignedBigInteger('price_id')->nullable();
+    }
+
+    public function post_migration(Blueprint $table): void
+    {
+        $table->foreign('payment_id')->references('id')->on('account_payment')->onDelete('set null');
+        $table->foreign('partner_id')->references('id')->on('partner_partner')->onDelete('set null');
+        $table->foreign('country_id')->references('id')->on('core_country')->onDelete('set null');
+        $table->foreign('price_id')->references('id')->on('domain_price')->onDelete('set null');
     }
 }
