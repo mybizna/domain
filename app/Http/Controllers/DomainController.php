@@ -3,10 +3,12 @@
 namespace Modules\Domain\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 use Modules\Domain\Classes\DomainProcessor;
 use Modules\Domain\Models\Domain;
 
-class DomainController extends Controller
+use Modules\Base\Http\Controllers\BaseController;
+class DomainController extends BaseController
 {
     public function index(Request $request)
     {
